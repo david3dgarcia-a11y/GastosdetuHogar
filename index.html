@@ -9,14 +9,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBHTMHhcZ3FQs5bSY9RD63Zql0Ov2bH53k",
-  authDomain: "gastosdehogar-c5f47.firebaseapp.com",
-  projectId: "gastosdehogar-c5f47",
-  storageBucket: "gastosdehogar-c5f47.firebasestorage.app",
-  messagingSenderId: "399650399335",
-  appId: "1:399650399335:web:f8a9be61c5688b10f160c2"
-};
+    
+    <!-- Firebase Compat (Autenticación y Base de Datos) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -695,14 +693,14 @@ const firebaseConfig = {
     <!-- 4. LÓGICA JAVASCRIPT MAESTRA               -->
     <!-- ========================================== -->
     <script>
+        // ¡ACTUALIZADO CON LAS LLAVES DEL NUEVO PROYECTO!
         const firebaseConfig = {
-            apiKey: "AIzaSyDTd4QZGwcbVcpat_J4VbGlUJ1sbUE1R98",
-            authDomain: "gastosdetuhogar-85609.firebaseapp.com",
-            projectId: "gastosdetuhogar-85609",
-            storageBucket: "gastosdetuhogar-85609.firebasestorage.app",
-            messagingSenderId: "638605827533",
-            appId: "1:638605827533:web:a451f6ff8c7d409155b884",
-            measurementId: "G-HGP0GVDVCQ"
+            apiKey: "AIzaSyBHTMHhcZ3FQs5bSY9RD63Zql0Ov2bH53k",
+            authDomain: "gastosdehogar-c5f47.firebaseapp.com",
+            projectId: "gastosdehogar-c5f47",
+            storageBucket: "gastosdehogar-c5f47.firebasestorage.app",
+            messagingSenderId: "399650399335",
+            appId: "1:399650399335:web:f8a9be61c5688b10f160c2"
         };
 
         let isFirebaseActive = false, db, auth, unsubscribeTransacciones = null;
