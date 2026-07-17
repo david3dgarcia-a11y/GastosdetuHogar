@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gastos de tu Hogar - Finanzas Compartidas</title>
     
-    <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Firebase Compat (Autenticación y Base de Datos) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -45,9 +42,6 @@
 </head>
 <body class="bg-[#fafafa] text-zinc-900 antialiased selection:bg-orange-50 selection:text-orange-600 overflow-x-hidden">
 
-    <!-- ========================================== -->
-    <!-- 1. PANTALLA DE ACCESO (LOGIN / REGISTRO)   -->
-    <!-- ========================================== -->
     <div id="auth-screen" class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center p-4 transition-opacity duration-300">
         <div class="w-full max-w-sm space-y-6">
             <div class="text-center space-y-2">
@@ -113,9 +107,6 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- 1.5. MODAL DE CONFIGURACIÓN DE GRUPO       -->
-    <!-- ========================================== -->
     <div id="modal-configuracion" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4 transition-opacity fade-in">
         <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl space-y-4 relative border border-zinc-200">
             <button onclick="cerrarModalConfig()" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-zinc-100 transition-colors text-xl font-light cursor-pointer">&times;</button>
@@ -148,12 +139,8 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- 2. CONTENEDOR PRINCIPAL DE LA APLICACIÓN   -->
-    <!-- ========================================== -->
     <div id="app-container" class="hidden flex flex-col md:flex-row min-h-screen w-full relative pb-20 md:pb-0">
 
-        <!-- 2.A. Barra Lateral Premium (Solo Escritorio) -->
         <aside class="hidden md:flex w-64 bg-white border-r border-zinc-200 flex-col p-5 space-y-6 shrink-0 print:hidden z-30 shadow-[1px_0_0_0_rgba(0,0,0,0.02)]">
             <div class="text-sm font-semibold tracking-tight text-zinc-900 pb-2 flex items-center gap-2.5 border-b border-zinc-100">
                 <span class="w-3.5 h-3.5 rounded-lg bg-gradient-to-tr from-orange-500 to-amber-500 shadow-sm shadow-orange-500/30"></span>
@@ -209,15 +196,13 @@
             </button>
 
             <div class="text-[10px] font-mono text-zinc-400 border-t border-zinc-100 pt-3 flex justify-between items-center uppercase tracking-wider font-medium">
-                <span>Gastos de Hogar v5.6</span>
+                <span>Gastos de Hogar v5.7</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-xs shadow-emerald-500/50" id="db-status-dot" title="Sincronizado en la nube"></span>
             </div>
         </aside>
 
-        <!-- 2.B. Área de Contenido Central -->
         <main class="flex-1 p-4 sm:p-6 md:p-8 max-w-5xl mx-auto w-full overflow-hidden space-y-6">
             
-            <!-- PESTAÑA A: MOVIMIENTOS -->
             <section id="pestaña-dashboard" class="tab-content space-y-6 fade-in">
                 <header class="border-b border-zinc-200/80 pb-4 print:hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex justify-between items-start w-full sm:w-auto">
@@ -243,7 +228,6 @@
                     </div>
                 </header>
 
-                <!-- Panel Superior Móvil -->
                 <div class="md:hidden bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-orange-200/50 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div class="flex items-center gap-3 w-full">
                         <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center font-bold text-white text-sm shadow-md uppercase shrink-0" id="avatar-usuario-movil">U</div>
@@ -366,7 +350,6 @@
                     </button>
                 </div>
 
-                <!-- Historial -->
                 <div id="contenedor-historial-modulo" class="bg-white rounded-xl border border-zinc-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.02)] overflow-hidden w-full relative">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between p-4 border-b border-zinc-100 gap-3 bg-white">
                         <div class="flex items-center gap-2.5 justify-between lg:justify-start w-full lg:w-auto">
@@ -412,7 +395,6 @@
                 </div>
             </section>
 
-            <!-- PESTAÑA B: PROYECCIONES TARJETAS Y MACRO -->
             <section id="pestaña-tarjetas" class="tab-content hidden space-y-6 fade-in">
                 <header class="border-b border-zinc-200/80 pb-4 print:hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex justify-between items-start w-full sm:w-auto">
@@ -492,7 +474,6 @@
                 </div>
             </section>
 
-            <!-- PESTAÑA C: GASTOS DE OBRA -->
             <section id="pestaña-obra" class="tab-content hidden space-y-6 fade-in">
                 <header class="border-b border-zinc-200/80 pb-4 print:hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex justify-between items-start w-full sm:w-auto">
@@ -573,10 +554,6 @@
             </section>
 
         </main>
-
-        <!-- ========================================== -->
-        <!-- 3. COMPONENTES MÓVILES Y DRAWER LATERAL    -->
-        <!-- ========================================== -->
 
         <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-zinc-200 flex justify-around py-2.5 z-40 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] print:hidden">
             <button onclick="cambiarPestaña('pestaña-dashboard')" id="btn-m-dashboard" class="flex flex-col items-center gap-0.5 text-orange-500 font-semibold cursor-pointer">
@@ -685,15 +662,9 @@
             </div>
         </div>
         
-    </div> <!-- FIN APP CONTAINER -->
+    </div> <div id="contenedor-toasts" class="fixed bottom-24 md:bottom-5 right-5 z-[70] flex flex-col gap-2 pointer-events-none print:hidden"></div>
 
-    <div id="contenedor-toasts" class="fixed bottom-24 md:bottom-5 right-5 z-[70] flex flex-col gap-2 pointer-events-none print:hidden"></div>
-
-    <!-- ========================================== -->
-    <!-- 4. LÓGICA JAVASCRIPT MAESTRA               -->
-    <!-- ========================================== -->
     <script>
-        // ¡ACTUALIZADO CON LAS LLAVES DEL NUEVO PROYECTO!
         const firebaseConfig = {
             apiKey: "AIzaSyBHTMHhcZ3FQs5bSY9RD63Zql0Ov2bH53k",
             authDomain: "gastosdehogar-c5f47.firebaseapp.com",
@@ -957,14 +928,34 @@
             setTimeout(() => { toast.classList.add('translate-y-2', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
         }
 
-        const mediosDePagoLista = ["Transferencia", "Visa Galicia", "Master Galicia", "Visa Hipotecario", "Master Del Sol", "Débito Galicia", "Débito", "Efectivo", "Préstamo"];
+        const mediosDePagoLista = ["Transferencia", "Depósito", "Visa Galicia", "Master Galicia", "Visa Hipotecario", "Master Del Sol", "Débito Galicia", "Débito", "Efectivo", "Préstamo"];
+        
         const DEFAULT_CATEGORIAS = {
-            hogar: [{id:"COM", nombre:"Comida/Súper"}, {id:"SER", nombre:"Servicios"}, {id:"TRA", nombre:"Transporte"}, {id:"SAL", nombre:"Salud"}, {id:"VAR", nombre:"Varios"}],
+            hogar: [{id:"COM", nombre:"Comida/Súper"}, {id:"SER", nombre:"Servicios"}, {id:"TRA", nombre:"Transporte"}, {id:"EDU", nombre:"Educación"}, {id:"SAL", nombre:"Salud"}, {id:"VAR", nombre:"Varios"}],
             obra: [{id:"MDO", nombre:"Mano de Obra"}, {id:"MAT", nombre:"Materiales"}, {id:"FLE", nombre:"Fletes"}],
             ingreso: [{id:"SUE", nombre:"Sueldo"}, {id:"FON", nombre:"Fondo Obra"}, {id:"INC", nombre:"Otros Ingresos"}]
         };
 
-        let categoriasPorPilar = JSON.parse(localStorage.getItem('categorias_app')) || JSON.parse(JSON.stringify(DEFAULT_CATEGORIAS));
+        // FUSIÓN INTELIGENTE: Mezcla tus categorías guardadas con los nuevos defaults sin borrar lo tuyo.
+        let categoriasGuardadas = JSON.parse(localStorage.getItem('categorias_app'));
+        let categoriasPorPilar = JSON.parse(JSON.stringify(DEFAULT_CATEGORIAS));
+        
+        if (categoriasGuardadas) {
+            for (let pilar in categoriasGuardadas) {
+                if (categoriasPorPilar[pilar]) {
+                    categoriasGuardadas[pilar].forEach(cat => {
+                        // Si la categoría que guardaste no está en los nuevos defaults, se la suma.
+                        if (!categoriasPorPilar[pilar].some(c => c.id === cat.id)) {
+                            categoriasPorPilar[pilar].push(cat);
+                        }
+                    });
+                }
+            }
+            localStorage.setItem('categorias_app', JSON.stringify(categoriasPorPilar));
+        } else {
+            localStorage.setItem('categorias_app', JSON.stringify(categoriasPorPilar));
+        }
+
         let listaCompletaCodigos = [];
 
         function reconstruirListaCodigos() { listaCompletaCodigos = [...categoriasPorPilar.hogar.map(c=>({...c, pilar:'hogar'})), ...categoriasPorPilar.obra.map(c=>({...c, pilar:'obra'})), ...categoriasPorPilar.ingreso.map(c=>({...c, pilar:'ingreso'}))]; }
