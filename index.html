@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gastos de tu Hogar - Finanzas Compartidas</title>
     
+    <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- Firebase Compat (Autenticación y Base de Datos) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -42,6 +45,9 @@
 </head>
 <body class="bg-[#fafafa] text-zinc-900 antialiased selection:bg-orange-50 selection:text-orange-600 overflow-x-hidden">
 
+    <!-- ========================================== -->
+    <!-- 1. PANTALLA DE ACCESO (LOGIN / REGISTRO)   -->
+    <!-- ========================================== -->
     <div id="auth-screen" class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center p-4 transition-opacity duration-300">
         <div class="w-full max-w-sm space-y-6">
             <div class="text-center space-y-2">
@@ -107,6 +113,9 @@
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- 1.5. MODAL DE CONFIGURACIÓN DE GRUPO       -->
+    <!-- ========================================== -->
     <div id="modal-configuracion" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4 transition-opacity fade-in">
         <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl space-y-4 relative border border-zinc-200">
             <button onclick="cerrarModalConfig()" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-zinc-100 transition-colors text-xl font-light cursor-pointer">&times;</button>
@@ -139,8 +148,12 @@
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- 2. CONTENEDOR PRINCIPAL DE LA APLICACIÓN   -->
+    <!-- ========================================== -->
     <div id="app-container" class="hidden flex flex-col md:flex-row min-h-screen w-full relative pb-20 md:pb-0">
 
+        <!-- 2.A. Barra Lateral Premium (Solo Escritorio) -->
         <aside class="hidden md:flex w-64 bg-white border-r border-zinc-200 flex-col p-5 space-y-6 shrink-0 print:hidden z-30 shadow-[1px_0_0_0_rgba(0,0,0,0.02)]">
             <div class="text-sm font-semibold tracking-tight text-zinc-900 pb-2 flex items-center gap-2.5 border-b border-zinc-100">
                 <span class="w-3.5 h-3.5 rounded-lg bg-gradient-to-tr from-orange-500 to-amber-500 shadow-sm shadow-orange-500/30"></span>
@@ -196,13 +209,15 @@
             </button>
 
             <div class="text-[10px] font-mono text-zinc-400 border-t border-zinc-100 pt-3 flex justify-between items-center uppercase tracking-wider font-medium">
-                <span>Gastos de Hogar v5.7</span>
+                <span>Gastos de Hogar v5.8</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-xs shadow-emerald-500/50" id="db-status-dot" title="Sincronizado en la nube"></span>
             </div>
         </aside>
 
+        <!-- 2.B. Área de Contenido Central -->
         <main class="flex-1 p-4 sm:p-6 md:p-8 max-w-5xl mx-auto w-full overflow-hidden space-y-6">
             
+            <!-- PESTAÑA A: MOVIMIENTOS -->
             <section id="pestaña-dashboard" class="tab-content space-y-6 fade-in">
                 <header class="border-b border-zinc-200/80 pb-4 print:hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex justify-between items-start w-full sm:w-auto">
@@ -228,6 +243,7 @@
                     </div>
                 </header>
 
+                <!-- Panel Superior Móvil -->
                 <div class="md:hidden bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-orange-200/50 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div class="flex items-center gap-3 w-full">
                         <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center font-bold text-white text-sm shadow-md uppercase shrink-0" id="avatar-usuario-movil">U</div>
@@ -350,6 +366,7 @@
                     </button>
                 </div>
 
+                <!-- Historial -->
                 <div id="contenedor-historial-modulo" class="bg-white rounded-xl border border-zinc-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.02)] overflow-hidden w-full relative">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between p-4 border-b border-zinc-100 gap-3 bg-white">
                         <div class="flex items-center gap-2.5 justify-between lg:justify-start w-full lg:w-auto">
@@ -395,6 +412,7 @@
                 </div>
             </section>
 
+            <!-- PESTAÑA B: PROYECCIONES TARJETAS Y MACRO -->
             <section id="pestaña-tarjetas" class="tab-content hidden space-y-6 fade-in">
                 <header class="border-b border-zinc-200/80 pb-4 print:hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex justify-between items-start w-full sm:w-auto">
@@ -474,6 +492,7 @@
                 </div>
             </section>
 
+            <!-- PESTAÑA C: GASTOS DE OBRA -->
             <section id="pestaña-obra" class="tab-content hidden space-y-6 fade-in">
                 <header class="border-b border-zinc-200/80 pb-4 print:hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex justify-between items-start w-full sm:w-auto">
@@ -554,6 +573,10 @@
             </section>
 
         </main>
+
+        <!-- ========================================== -->
+        <!-- 3. COMPONENTES MÓVILES Y DRAWER LATERAL    -->
+        <!-- ========================================== -->
 
         <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-zinc-200 flex justify-around py-2.5 z-40 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] print:hidden">
             <button onclick="cambiarPestaña('pestaña-dashboard')" id="btn-m-dashboard" class="flex flex-col items-center gap-0.5 text-orange-500 font-semibold cursor-pointer">
@@ -662,8 +685,13 @@
             </div>
         </div>
         
-    </div> <div id="contenedor-toasts" class="fixed bottom-24 md:bottom-5 right-5 z-[70] flex flex-col gap-2 pointer-events-none print:hidden"></div>
+    </div> <!-- FIN APP CONTAINER -->
 
+    <div id="contenedor-toasts" class="fixed bottom-24 md:bottom-5 right-5 z-[70] flex flex-col gap-2 pointer-events-none print:hidden"></div>
+
+    <!-- ========================================== -->
+    <!-- 4. LÓGICA JAVASCRIPT MAESTRA               -->
+    <!-- ========================================== -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyBHTMHhcZ3FQs5bSY9RD63Zql0Ov2bH53k",
@@ -697,9 +725,7 @@
             console.error("Fallo Firebase: ", e); 
         }
 
-        /* -------------------------------------
-           AUTENTICACIÓN Y SEGURIDAD
-           ------------------------------------- */
+        /* --- AUTENTICACIÓN Y SEGURIDAD --- */
         function togglePasswordVisibility() {
             const input = document.getElementById('auth-password');
             input.setAttribute('type', input.getAttribute('type') === 'password' ? 'text' : 'password');
@@ -827,9 +853,7 @@
             }
         };
 
-        /* -------------------------------------
-           MODAL CONFIGURACIÓN Y COMPARTIR
-           ------------------------------------- */
+        /* --- MODAL CONFIGURACIÓN Y COMPARTIR --- */
         window.invitarFamiliar = function() {
             const mensaje = `¡Hola! Te invito a sincronizar nuestros gastos del hogar.\n\n` +
                             `📥 Código de Grupo: ${userProfile.grupoId}\n` +
@@ -848,14 +872,11 @@
             document.getElementById('modal-configuracion').classList.remove('hidden');
         };
 
-        window.cerrarModalConfig = function() {
-            document.getElementById('modal-configuracion').classList.add('hidden');
-        };
+        window.cerrarModalConfig = function() { document.getElementById('modal-configuracion').classList.add('hidden'); };
 
         window.guardarNuevaClave = async function() {
             const nuevaClave = document.getElementById('input-nueva-clave').value.trim();
             if(!nuevaClave) return mostrarToast('La clave no puede estar vacía.', 'error');
-            
             if(isFirebaseActive) {
                 try {
                     await db.collection('grupos').doc(userProfile.grupoId).update({ claveAcceso: nuevaClave });
@@ -864,16 +885,13 @@
                 } catch(e) { mostrarToast('Error al actualizar la clave.', 'error'); }
             } else {
                 userProfile.claveAcceso = nuevaClave;
-                if(sesionSimulada) {
-                    sesionSimulada.claveAcceso = nuevaClave;
-                    localStorage.setItem('sesion_simulada', JSON.stringify(sesionSimulada));
-                }
+                if(sesionSimulada) { sesionSimulada.claveAcceso = nuevaClave; localStorage.setItem('sesion_simulada', JSON.stringify(sesionSimulada)); }
                 mostrarToast('Clave de grupo actualizada (Modo Local).');
             }
             cerrarModalConfig();
         };
 
-
+        /* --- NAVEGACIÓN Y FORMULARIO --- */
         window.abrirDrawerMovimiento = function() {
             document.getElementById('overlay-drawer').classList.remove('hidden');
             document.getElementById('drawer-movimiento').classList.remove('translate-y-full', 'sm:translate-x-full');
@@ -929,14 +947,12 @@
         }
 
         const mediosDePagoLista = ["Transferencia", "Depósito", "Visa Galicia", "Master Galicia", "Visa Hipotecario", "Master Del Sol", "Débito Galicia", "Débito", "Efectivo", "Préstamo"];
-        
         const DEFAULT_CATEGORIAS = {
             hogar: [{id:"COM", nombre:"Comida/Súper"}, {id:"SER", nombre:"Servicios"}, {id:"TRA", nombre:"Transporte"}, {id:"EDU", nombre:"Educación"}, {id:"SAL", nombre:"Salud"}, {id:"VAR", nombre:"Varios"}],
             obra: [{id:"MDO", nombre:"Mano de Obra"}, {id:"MAT", nombre:"Materiales"}, {id:"FLE", nombre:"Fletes"}],
             ingreso: [{id:"SUE", nombre:"Sueldo"}, {id:"FON", nombre:"Fondo Obra"}, {id:"INC", nombre:"Otros Ingresos"}]
         };
 
-        // FUSIÓN INTELIGENTE: Mezcla tus categorías guardadas con los nuevos defaults sin borrar lo tuyo.
         let categoriasGuardadas = JSON.parse(localStorage.getItem('categorias_app'));
         let categoriasPorPilar = JSON.parse(JSON.stringify(DEFAULT_CATEGORIAS));
         
@@ -944,10 +960,7 @@
             for (let pilar in categoriasGuardadas) {
                 if (categoriasPorPilar[pilar]) {
                     categoriasGuardadas[pilar].forEach(cat => {
-                        // Si la categoría que guardaste no está en los nuevos defaults, se la suma.
-                        if (!categoriasPorPilar[pilar].some(c => c.id === cat.id)) {
-                            categoriasPorPilar[pilar].push(cat);
-                        }
+                        if (!categoriasPorPilar[pilar].some(c => c.id === cat.id)) categoriasPorPilar[pilar].push(cat);
                     });
                 }
             }
@@ -1165,17 +1178,50 @@
             poblarFiltroProyecciones(setMeses);
         }
 
+        /* --- MOTOR DE CÁLCULO DEVENGADO / CUOTAS --- */
         function getTransaccionesFiltro() {
-            const tr = JSON.parse(localStorage.getItem('transacciones_app')) || [], val = document.getElementById('filtro-meses-global').value;
-            let filtradas = []; tr.forEach((t, i) => { if (t && t.fecha && (val === "TODOS" || t.fecha.startsWith(val))) filtradas.push({ tr: t, idx: i, idNube: t.id || null }); }); return filtradas;
+            const tr = JSON.parse(localStorage.getItem('transacciones_app')) || []; 
+            const val = document.getElementById('filtro-meses-global').value;
+            let filtradas = []; 
+            
+            tr.forEach((t, i) => { 
+                if(!t) return;
+                const esTarjeta = t.medioPago && (t.medioPago.includes("Visa") || t.medioPago.includes("Master"));
+                
+                if (val === "TODOS") {
+                    filtradas.push({ tr: t, idx: i, idNube: t.id || null, montoVisual: parseFloat(t.monto)||0, cuotaInfo: t.cuotasTotales > 1 ? `1/${t.cuotasTotales}` : '-' });
+                } else {
+                    if (esTarjeta && t.cuotasTotales > 1) {
+                        const [y, m] = (t.mesInicioResumen || t.fecha.substring(0,7)).split('-');
+                        const fIni = new Date(parseInt(y), parseInt(m) - 1, 1);
+                        const [selY, selM] = val.split('-');
+                        const selDate = new Date(parseInt(selY), parseInt(selM) - 1, 1);
+                        
+                        const cuotaActual = ((selDate.getFullYear() - fIni.getFullYear()) * 12 + (selDate.getMonth() - fIni.getMonth())) + 1;
+                        
+                        if (cuotaActual >= 1 && cuotaActual <= t.cuotasTotales) {
+                            filtradas.push({ tr: t, idx: i, idNube: t.id || null, montoVisual: (t.monto / t.cuotasTotales), cuotaInfo: `${cuotaActual}/${t.cuotasTotales}` });
+                        }
+                    } else {
+                        if (t.fecha && t.fecha.startsWith(val)) {
+                            filtradas.push({ tr: t, idx: i, idNube: t.id || null, montoVisual: parseFloat(t.monto)||0, cuotaInfo: '-' });
+                        }
+                    }
+                }
+            }); 
+            return filtradas;
         }
 
         window.recargarTodoElSistema = function() {
             const filtradas = getTransaccionesFiltro(); let ing = 0, egr = 0, obr = 0, tarj = 0, deb = 0;
+            
             filtradas.forEach(item => {
-                const t = item.tr, m = parseFloat(t.monto) || 0;
+                const t = item.tr, m = item.montoVisual;
                 if (t.pilar === 'ingreso') ing += m; else {
-                    egr += m; if (t.pilar === 'obra' || ['MDO','MAT','FLE'].includes(t.categoria)) obr += m; else if (t.medioPago && (t.medioPago.includes("Visa") || t.medioPago.includes("Master"))) tarj += m; else deb += m;
+                    egr += m; 
+                    if (t.pilar === 'obra' || ['MDO','MAT','FLE'].includes(t.categoria)) obr += m; 
+                    else if (t.medioPago && (t.medioPago.includes("Visa") || t.medioPago.includes("Master"))) tarj += m; 
+                    else deb += m;
                 }
             });
 
@@ -1237,10 +1283,12 @@
             const itemsPagina = filtradas.slice().reverse().slice(inicio, fin);
 
             tbody.innerHTML = itemsPagina.map(item => {
-                const { tr: t, idx, idNube } = item;
+                const { tr: t, idx, idNube, montoVisual, cuotaInfo } = item;
                 const badge = (t.pilar==='ingreso')?"bg-emerald-50 text-emerald-700 border-emerald-200" : (['MAT','MDO','FLE'].includes(t.categoria)?"bg-amber-50 text-amber-700 border-amber-200":"bg-zinc-50 text-zinc-600 border-zinc-200");
                 const colorMont = t.pilar==='ingreso'?'text-emerald-600':'text-zinc-700';
-                return `<tr class="hover:bg-zinc-50/40 border-b border-zinc-100"><td class="p-3 text-center print:hidden"><input type="checkbox" data-idx="${idx}" data-idnube="${idNube}" onchange="actualizarSeleccionIndividual(this, ${idx}, '${idNube}')" class="check-item-historial accent-orange-500 w-4 h-4 cursor-pointer"></td><td class="p-3 text-xs font-mono text-zinc-400">${t.fecha||'-'}</td><td class="p-3 font-medium text-zinc-850 truncate max-w-[150px] text-xs" title="${t.descripcion||''}">${t.descripcion||'-'}</td><td class="p-3 text-xs text-zinc-500">${t.medioPago||'-'}</td><td class="p-3 text-center"><span class="${badge} font-semibold px-2 py-0.5 rounded border text-[10px] font-mono">[${t.categoria}]</span></td><td class="p-3 text-[10px] text-zinc-400 truncate max-w-[80px]">${t.cargadoPor||'-'}</td><td class="p-3 text-right text-xs font-bold ${colorMont}">$${(t.monto||0).toLocaleString('es-AR',{minimumFractionDigits:2})}</td><td class="p-3 text-center print:hidden whitespace-nowrap"><button onclick="editarFilaUnica(${idx}, '${idNube}')" class="text-blue-400 hover:text-blue-600 p-1 mr-1 text-sm cursor-pointer" title="Editar">✏️</button><button onclick="eliminarFilaUnica(${idx}, '${idNube}')" class="text-zinc-400 hover:text-rose-600 p-1 text-sm cursor-pointer" title="Eliminar">🗑️</button></td></tr>`;
+                const tagCuota = cuotaInfo !== '-' ? `<br><span class="text-[9px] text-zinc-400 font-medium">Cuota ${cuotaInfo}</span>` : '';
+                
+                return `<tr class="hover:bg-zinc-50/40 border-b border-zinc-100"><td class="p-3 text-center print:hidden"><input type="checkbox" data-idx="${idx}" data-idnube="${idNube}" onchange="actualizarSeleccionIndividual(this, ${idx}, '${idNube}')" class="check-item-historial accent-orange-500 w-4 h-4 cursor-pointer"></td><td class="p-3 text-xs font-mono text-zinc-400">${t.fecha||'-'}</td><td class="p-3 font-medium text-zinc-850 truncate max-w-[150px] text-xs" title="${t.descripcion||''}">${t.descripcion||'-'}</td><td class="p-3 text-xs text-zinc-500">${t.medioPago||'-'}</td><td class="p-3 text-center"><span class="${badge} font-semibold px-2 py-0.5 rounded border text-[10px] font-mono">[${t.categoria}]</span></td><td class="p-3 text-[10px] text-zinc-400 truncate max-w-[80px]">${t.cargadoPor||'-'}</td><td class="p-3 text-right text-xs font-bold ${colorMont}">$${(montoVisual||0).toLocaleString('es-AR',{minimumFractionDigits:2})}${tagCuota}</td><td class="p-3 text-center print:hidden whitespace-nowrap"><button onclick="editarFilaUnica(${idx}, '${idNube}')" class="text-blue-400 hover:text-blue-600 p-1 mr-1 text-sm cursor-pointer" title="Editar">✏️</button><button onclick="eliminarFilaUnica(${idx}, '${idNube}')" class="text-zinc-400 hover:text-rose-600 p-1 text-sm cursor-pointer" title="Eliminar">🗑️</button></td></tr>`;
             }).join('');
 
             if(totalPaginas > 1) {
@@ -1253,10 +1301,7 @@
             }
         }
 
-        window.cambiarPaginaHistorial = function(delta) {
-            paginaActualHistorial += delta;
-            renderizarHistorial(getTransaccionesFiltro());
-        };
+        window.cambiarPaginaHistorial = function(delta) { paginaActualHistorial += delta; renderizarHistorial(getTransaccionesFiltro()); };
 
         window.eliminarFilaUnica = async function(idx, idNube) {
             if(!confirm("¿Remover registro permanentemente?")) return;
@@ -1265,23 +1310,14 @@
         };
 
         window.editarFilaUnica = function(idx, idNube) {
-            let tr = JSON.parse(localStorage.getItem('transacciones_app')) || [];
-            let t = tr[idx];
-            if(!t) return;
+            let tr = JSON.parse(localStorage.getItem('transacciones_app')) || []; let t = tr[idx]; if(!t) return;
             modoEdicion = { activo: true, idx: idx, idNube: idNube };
-            
-            document.getElementById('select-pilar').value = t.pilar;
-            actualizarSelectConceptos();
-            document.getElementById('select-concepto').value = t.categoria;
-            document.getElementById('select-medio-pago').value = t.medioPago;
-            document.getElementById('movimiento-fecha-universal').value = t.fecha;
-            document.getElementById('monto-movimiento').value = t.monto;
+            document.getElementById('select-pilar').value = t.pilar; actualizarSelectConceptos();
+            document.getElementById('select-concepto').value = t.categoria; document.getElementById('select-medio-pago').value = t.medioPago;
+            document.getElementById('movimiento-fecha-universal').value = t.fecha; document.getElementById('monto-movimiento').value = t.monto;
             document.getElementById('observaciones-movimiento').value = t.observaciones || "";
-
-            document.getElementById('drawer-titulo').innerText = "Editar Movimiento";
-            document.getElementById('btn-guardar').innerText = "Actualizar Registro";
+            document.getElementById('drawer-titulo').innerText = "Editar Movimiento"; document.getElementById('btn-guardar').innerText = "Actualizar Registro";
             document.getElementById('contenedor-opciones-extra').classList.add('hidden');
-
             abrirDrawerMovimiento();
         };
 
@@ -1315,15 +1351,8 @@
                 }
             });
 
-            document.getElementById('total-visa-galicia').innerText = `$${plásticos["Visa Galicia"].toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-            document.getElementById('total-master-galicia').innerText = `$${plásticos["Master Galicia"].toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-            document.getElementById('total-visa-hipotecario').innerText = `$${plásticos["Visa Hipotecario"].toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-            document.getElementById('total-master-del-sol').innerText = `$${plásticos["Master Del Sol"].toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-
-            document.getElementById('macro-total-tc').innerText = `$${macroTC.toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-            document.getElementById('macro-total-rec').innerText = `$${macroRec.toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-            document.getElementById('macro-total-pre').innerText = `$${macroPre.toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-            document.getElementById('macro-gran-total').innerText = `$${(macroTC + macroRec + macroPre).toLocaleString('es-AR', {minimumFractionDigits:2})}`;
+            document.getElementById('total-visa-galicia').innerText = `$${plásticos["Visa Galicia"].toLocaleString('es-AR', {minimumFractionDigits:2})}`; document.getElementById('total-master-galicia').innerText = `$${plásticos["Master Galicia"].toLocaleString('es-AR', {minimumFractionDigits:2})}`; document.getElementById('total-visa-hipotecario').innerText = `$${plásticos["Visa Hipotecario"].toLocaleString('es-AR', {minimumFractionDigits:2})}`; document.getElementById('total-master-del-sol').innerText = `$${plásticos["Master Del Sol"].toLocaleString('es-AR', {minimumFractionDigits:2})}`;
+            document.getElementById('macro-total-tc').innerText = `$${macroTC.toLocaleString('es-AR', {minimumFractionDigits:2})}`; document.getElementById('macro-total-rec').innerText = `$${macroRec.toLocaleString('es-AR', {minimumFractionDigits:2})}`; document.getElementById('macro-total-pre').innerText = `$${macroPre.toLocaleString('es-AR', {minimumFractionDigits:2})}`; document.getElementById('macro-gran-total').innerText = `$${(macroTC + macroRec + macroPre).toLocaleString('es-AR', {minimumFractionDigits:2})}`;
             document.getElementById('contador-cuotas').innerText = `${cFinanciadas} conceptos`;
         }
 
@@ -1358,18 +1387,31 @@
             mostrarToast("Límites actualizados."); actualizarPresupuestosObra();
         });
 
+        /* --- EXPORTACIÓN DE DATA ENTRY (CSV COMPLETO) --- */
         window.exportarExcelCSVFiltrado = function() {
             const filas = getTransaccionesFiltro(); if(!filas.length) return mostrarToast("Sin datos para exportar.", "error");
-            let csv = "Fecha,Descripcion,Medio Pago,Categoria,Pilar,Monto,Cargado Por\n";
-            filas.forEach(f => csv += `${f.tr.fecha||""},${(f.tr.descripcion||"").replace(/,/g," ")},${f.tr.medioPago||""},${f.tr.categoria||""},${f.tr.pilar||""},${f.tr.monto||0},${f.tr.cargadoPor||""}\n`);
-            const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob);
-            link.setAttribute("download", `historial_${new Date().toISOString().split('T')[0]}.csv`); link.click();
+            
+            let csv = "Fecha Compra,Periodo Afectado,Pilar,Categoria,Medio de Pago,Descripcion,Observaciones,Cuotas Totales,Cuota Actual,Monto de Cuota (Devengado),Monto Total Operacion,Cargado Por\n";
+            
+            filas.forEach(f => {
+                const t = f.tr;
+                const desc = (t.descripcion||"").replace(/,/g," ");
+                const obs = (t.observaciones||"").replace(/,/g," ");
+                const periodo = document.getElementById('filtro-meses-global').value === "TODOS" ? "Consolidado" : document.getElementById('filtro-meses-global').value;
+                
+                csv += `${t.fecha||""},${periodo},${t.pilar||""},${t.categoria||""},${t.medioPago||""},${desc},${obs},${t.cuotasTotales||1},${f.cuotaInfo},${f.montoVisual||0},${t.monto||0},${t.cargadoPor||""}\n`;
+            });
+
+            const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' }); 
+            const link = document.createElement("a"); 
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `DataEntry_GastosHogar_${new Date().toISOString().split('T')[0]}.csv`); 
+            link.click();
         };
 
         window.exportarInformePDFFiltrado = function() { window.print(); };
 
         document.addEventListener('DOMContentLoaded', () => { inicializarFormulario(); evaluarEstadoSesion(); });
-
     </script>
 </body>
 </html>
